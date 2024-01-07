@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@pixi/math-extras": "^7.3.3",
+    "pixi-viewport": "^5.0.2",
+    "pixi.js": "^7.3.3"
+  },
+  "devDependencies": {
+    "vite": "^5.0.11"
+  }
+}
