@@ -62,7 +62,6 @@ function main() {
         DENT_RADIUS * 0.8
       )
   );
-  puzzleBox.sortableChildren = true;
   puzzleBox.position.set(
     app.screen.width / 2 - puzzleBox.width / 2,
     app.screen.height / 2 - puzzleBox.height / 2
@@ -110,6 +109,7 @@ function main() {
   }
 
   const board = puzzleBox.addChild(new PIXI.Container());
+  board.sortableChildren = true;
   board.position = BOARD_MARGIN;
 
   const magentaPiece = board.addChild(new PIXI.Container());
