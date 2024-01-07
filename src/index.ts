@@ -41,6 +41,9 @@ function main() {
       .pinch()
       .wheel()
   );
+  window.addEventListener("resize", () => {
+    viewport.resize(app.screen.width, app.screen.height);
+  });
 
   const puzzleBox = viewport.addChild(
     new PIXI.Graphics()
@@ -177,26 +180,23 @@ function main() {
   lightBluePiece.addChild(makeBall("#98ceea")).position = gridToWorld(1, 1);
   lightBluePiece.position = gridToWorld(6, 0).add(padding);
 
-  const onDragMove = (event: PIXI.FederatedPointerEvent) => {
+  app.stage.eventMode = "static";
+  app.stage.hitArea = app.screen;
+  app.stage.on("pointermove", (event) => {
     if (!dragTarget) return;
 
     dragTarget.position = dragTarget.parent
       .toLocal(event.global)
       .add(dragTouchOffset);
-  };
-
-  const onDragEnd = () => {
+  });
+  app.stage.on("pointerup", onDragEnd);
+  app.stage.on("pointerupoutside", onDragEnd);
+  function onDragEnd() {
     if (!dragTarget) return;
 
     dragTarget.alpha = 1;
     dragTarget = undefined;
-  };
-
-  app.stage.eventMode = "static";
-  app.stage.hitArea = app.screen;
-  app.stage.on("pointermove", onDragMove);
-  app.stage.on("pointerup", onDragEnd);
-  app.stage.on("pointerupoutside", onDragEnd);
+  }
 }
 
 function gridToWorld(x: number, y: number) {
