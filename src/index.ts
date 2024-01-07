@@ -7,6 +7,7 @@ import { Viewport } from "pixi-viewport";
 // TODO: add piece flipping
 // TODO: add piece elevation
 // TODO: add piece snapping (inside box only + check overlaps)
+// TODO: add yjs rooms
 // TODO: add piece ball connectors?
 
 const WORLD_SIZE = 2000;
@@ -16,6 +17,7 @@ const REFLECTION_RADIUS = DENT_RADIUS / 7;
 const BOARD_MAX_X = 11;
 const BOARD_MAX_Y = 5;
 
+let maxZIndex = 100;
 let dragTarget: PIXI.Container | undefined;
 let dragTouchOffset: PIXI.Point;
 
@@ -212,8 +214,8 @@ function makeBall(color: PIXI.ColorSource) {
   ball.on("pointerdown", (event) => {
     event.stopPropagation();
     dragTarget = ball.parent;
-    dragTarget.zIndex = dragTarget.parent.children.length + 1;
-    dragTarget.parent.sortChildren();
+    maxZIndex += 1;
+    dragTarget.zIndex = maxZIndex;
     dragTarget.alpha = 0.5;
     dragTouchOffset = dragTarget.position.subtract(
       dragTarget.parent.toLocal(event.global)
