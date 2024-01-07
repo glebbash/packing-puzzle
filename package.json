@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "vite",
-    "build": "vite build"
+    "build": "vite build --base /packing-puzzle"
   },
   "dependencies": {
     "@pixi/math-extras": "^7.3.3",
