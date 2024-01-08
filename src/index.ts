@@ -13,15 +13,11 @@ import { WebrtcProvider } from "y-webrtc";
 
 const WORLD_SIZE = 2000;
 const DENT_RADIUS = 13;
-const BALL_PIECE_RADIUS = DENT_RADIUS * 1.125;
+const PART_RADIUS = DENT_RADIUS * 1.125;
 const REFLECTION_RADIUS = DENT_RADIUS / 7;
 const BOARD_MAX_X = 11;
 const BOARD_MAX_Y = 5;
-const DIF = BALL_PIECE_RADIUS - DENT_RADIUS;
-const BOARD_MARGIN = new PIXI.Point(
-  DENT_RADIUS * 0.5 - DIF,
-  DENT_RADIUS * 0.5 - DIF
-);
+const BOARD_MARGIN = DENT_RADIUS * 1.5 - PART_RADIUS;
 
 let draggedPieceName: string | undefined;
 let dragTouchOffset: PIXI.Point;
@@ -101,6 +97,69 @@ function main() {
     }
   }
 
+  const board = puzzleBox.addChild(new PIXI.Container());
+  board.sortableChildren = true;
+  board.position.x = BOARD_MARGIN;
+  board.position.y = BOARD_MARGIN;
+
+  board.addChild(
+    makePiece("pink", "#e66ba2", -3, 6, [
+      [1, 1, 1, 0],
+      [0, 0, 1, 1],
+    ]),
+    makePiece("teal", "#83c2b9", -3, -4, [
+      [1, 1],
+      [1, 1],
+      [0, 1],
+    ]),
+    makePiece("lGreen", "#8eb71d", 2, 6, [
+      [1, 0, 1],
+      [1, 1, 1],
+    ]),
+    makePiece("maroon", "#aa201e", 11, 6, [
+      [0, 1, 1],
+      [1, 1, 0],
+    ]),
+    makePiece("orange", "#e78a00", 12, -1, [
+      [0, 0, 1],
+      [1, 1, 1],
+      [0, 1, 0],
+    ]),
+    makePiece("dGreen", "#008455", 12, 3, [
+      [0, 1, 0],
+      [1, 1, 1],
+    ]),
+    makePiece("purple", "#7b1d7b", 0, -4, [
+      [1, 1, 0],
+      [0, 1, 1],
+      [0, 0, 1],
+    ]),
+    makePiece("darkBlue", "#143d8c", 4, -4, [
+      [1, 1],
+      [0, 1],
+      [0, 1],
+    ]),
+    makePiece("red", "#d30710", -3, 0, [
+      [1, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+    ]),
+    makePiece("yellow", "#f5d100", 6, 6, [
+      [1, 1, 1, 1],
+      [0, 1, 0, 0],
+    ]),
+    makePiece("blue", "#0094d4", 7, -4, [
+      [1, 1, 1],
+      [0, 0, 1],
+      [0, 0, 1],
+    ]),
+    makePiece("lBlue", "#0094d4", 11, -3, [
+      [1, 1],
+      [0, 1],
+    ])
+  );
+
   app.stage.eventMode = "static";
   app.stage.hitArea = app.screen;
   app.stage.on("pointermove", onPieceDragMove);
@@ -115,90 +174,6 @@ function main() {
       piece.zIndex = pieceState.get("zIndex");
     }
   });
-
-  const board = puzzleBox.addChild(new PIXI.Container());
-  board.sortableChildren = true;
-  board.position = BOARD_MARGIN;
-
-  addPiece(board, "pink", gridToWorld(0, 0));
-  addPiecePart("pink", "#e66ba2", 0, 0);
-  addPiecePart("pink", "#e66ba2", 0, 0);
-  addPiecePart("pink", "#e66ba2", 1, 0);
-  addPiecePart("pink", "#e66ba2", 2, 0);
-  addPiecePart("pink", "#e66ba2", 2, 1);
-  addPiecePart("pink", "#e66ba2", 3, 1);
-
-  addPiece(board, "teal", gridToWorld(0, 1));
-  addPiecePart("teal", "#83c2b9", 0, 0);
-  addPiecePart("teal", "#83c2b9", 0, 1);
-  addPiecePart("teal", "#83c2b9", 1, 0);
-  addPiecePart("teal", "#83c2b9", 1, 1);
-  addPiecePart("teal", "#83c2b9", 1, 2);
-
-  addPiece(board, "lGreen", gridToWorld(0, 3));
-  addPiecePart("lGreen", "#8eb71d", 0, 0);
-  addPiecePart("lGreen", "#8eb71d", 0, 1);
-  addPiecePart("lGreen", "#8eb71d", 1, 1);
-  addPiecePart("lGreen", "#8eb71d", 2, 1);
-  addPiecePart("lGreen", "#8eb71d", 2, 0);
-
-  addPiece(board, "maroon", gridToWorld(3, 3));
-  addPiecePart("maroon", "#aa201e", 0, 1);
-  addPiecePart("maroon", "#aa201e", 1, 1);
-  addPiecePart("maroon", "#aa201e", 1, 0);
-  addPiecePart("maroon", "#aa201e", 2, 0);
-
-  addPiece(board, "orange", gridToWorld(2, 1));
-  addPiecePart("orange", "#e78a00", 0, 1);
-  addPiecePart("orange", "#e78a00", 1, 1);
-  addPiecePart("orange", "#e78a00", 2, 1);
-  addPiecePart("orange", "#e78a00", 2, 0);
-  addPiecePart("orange", "#e78a00", 1, 2);
-
-  addPiece(board, "dGreen", gridToWorld(5, 3));
-  addPiecePart("dGreen", "#008455", 0, 1);
-  addPiecePart("dGreen", "#008455", 1, 1);
-  addPiecePart("dGreen", "#008455", 2, 1);
-  addPiecePart("dGreen", "#008455", 1, 0);
-
-  addPiece(board, "purple", gridToWorld(6, 2));
-  addPiecePart("purple", "#7b1d7b", 0, 0);
-  addPiecePart("purple", "#7b1d7b", 1, 0);
-  addPiecePart("purple", "#7b1d7b", 1, 1);
-  addPiecePart("purple", "#7b1d7b", 2, 1);
-  addPiecePart("purple", "#7b1d7b", 2, 2);
-
-  addPiece(board, "darkBlue", gridToWorld(8, 2));
-  addPiecePart("darkBlue", "#143d8c", 0, 0);
-  addPiecePart("darkBlue", "#143d8c", 1, 0);
-  addPiecePart("darkBlue", "#143d8c", 1, 1);
-  addPiecePart("darkBlue", "#143d8c", 1, 2);
-
-  addPiece(board, "red", gridToWorld(9, 1));
-  addPiecePart("red", "#d30710", 0, 0);
-  addPiecePart("red", "#d30710", 1, 0);
-  addPiecePart("red", "#d30710", 1, 1);
-  addPiecePart("red", "#d30710", 1, 2);
-  addPiecePart("red", "#d30710", 1, 3);
-
-  addPiece(board, "yellow", gridToWorld(7, 0));
-  addPiecePart("yellow", "#f5d100", 0, 0);
-  addPiecePart("yellow", "#f5d100", 1, 0);
-  addPiecePart("yellow", "#f5d100", 2, 0);
-  addPiecePart("yellow", "#f5d100", 3, 0);
-  addPiecePart("yellow", "#f5d100", 1, 1);
-
-  addPiece(board, "blue", gridToWorld(3, 0));
-  addPiecePart("blue", "#0094d4", 0, 0);
-  addPiecePart("blue", "#0094d4", 1, 0);
-  addPiecePart("blue", "#0094d4", 2, 0);
-  addPiecePart("blue", "#0094d4", 2, 1);
-  addPiecePart("blue", "#0094d4", 2, 2);
-
-  addPiece(board, "lBlue", gridToWorld(6, 0));
-  addPiecePart("lBlue", "#98ceea", 0, 0);
-  addPiecePart("lBlue", "#98ceea", 0, 1);
-  addPiecePart("lBlue", "#98ceea", 1, 1);
 }
 
 function onPieceDragStart(this: string, event: PIXI.FederatedPointerEvent) {
@@ -244,44 +219,48 @@ function onPieceDragEnd() {
   draggedPieceName = undefined;
 }
 
-function addPiece(
-  container: PIXI.Container,
+function makePiece(
   pieceName: string,
-  pos: PIXI.Point
+  color: PIXI.ColorSource,
+  gridX: number,
+  gridY: number,
+  parts: (0 | 1)[][]
 ) {
-  pieces[pieceName] = container.addChild(new PIXI.Container());
-  pieces[pieceName].position = pos;
+  const piece = new PIXI.Container();
+  piece.position = gridToWorld(gridX, gridY);
   piecesState.set(
     pieceName,
     new Y.Map([
-      ["x", pos.x],
-      ["y", pos.y],
+      ["x", piece.position.x],
+      ["y", piece.position.y],
     ])
   );
-}
 
-function addPiecePart(
-  pieceName: string,
-  color: PIXI.ColorSource,
-  x: number,
-  y: number
-) {
-  const ball = pieces[pieceName].addChild(
-    new PIXI.Graphics()
-      .beginFill(color)
-      .drawCircle(BALL_PIECE_RADIUS, BALL_PIECE_RADIUS, BALL_PIECE_RADIUS)
-  );
-  ball.eventMode = "static";
-  ball.cursor = "pointer";
-  ball.position = gridToWorld(x, y);
-  ball.on("pointerdown", onPieceDragStart, pieceName);
+  for (let y = 0; y < parts.length; y++) {
+    for (let x = 0; x < parts[y].length; x++) {
+      if (parts[y][x] === 0) continue;
 
-  const reflection = ball.addChild(
-    new PIXI.Graphics()
-      .beginFill("white")
-      .drawCircle(REFLECTION_RADIUS, REFLECTION_RADIUS, REFLECTION_RADIUS)
-  );
-  reflection.position.set(DENT_RADIUS * 0.8, DENT_RADIUS * 0.8);
+      const part = piece.addChild(
+        new PIXI.Graphics()
+          .beginFill(color)
+          .drawCircle(PART_RADIUS, PART_RADIUS, PART_RADIUS)
+      );
+      part.eventMode = "static";
+      part.cursor = "pointer";
+      part.position = gridToWorld(x, y);
+      part.on("pointerdown", onPieceDragStart, pieceName);
+
+      const reflection = part.addChild(
+        new PIXI.Graphics()
+          .beginFill("white")
+          .drawCircle(REFLECTION_RADIUS, REFLECTION_RADIUS, REFLECTION_RADIUS)
+      );
+      reflection.position.set(DENT_RADIUS * 0.8, DENT_RADIUS * 0.8);
+    }
+  }
+
+  pieces[pieceName] = piece;
+  return piece;
 }
 
 function gridToWorld(x: number, y: number) {
