@@ -8,6 +8,7 @@ import { WebrtcProvider } from "y-webrtc";
 // TODO: add piece rotation
 // TODO: add piece flipping
 // TODO: do not drop piece if overlaps
+// TODO: fix zIndex bug
 // TODO?: add piece ball connectors
 // TODO?: snap inside box only
 
@@ -35,7 +36,9 @@ const piecesState = yDoc.getMap<Y.Map<any>>("piecesState");
 main();
 
 function main() {
-  const docId = `packing-puzzle/${window.location.hash}`;
+  const params = new URLSearchParams(window.location.search);
+  const roomId = params.get("room") ?? crypto.randomUUID();
+  const docId = `packing-puzzle/${roomId}`;
   new IndexeddbPersistence(docId, yDoc);
   new WebrtcProvider(docId, yDoc, {
     signaling: ["wss://yjs-signaling.deno.dev/"],
