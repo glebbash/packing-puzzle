@@ -7,7 +7,7 @@ import { WebrtcProvider } from "y-webrtc";
 
 // TODO: add piece rotation
 // TODO: add piece flipping
-// TODO: do not dorp piece if overlaps
+// TODO: do not drop piece if overlaps
 // TODO?: add piece ball connectors
 // TODO?: snap inside box only
 
@@ -120,84 +120,84 @@ function main() {
   board.position = BOARD_MARGIN;
 
   addPiece(board, "pink", gridToWorld(0, 0));
-  addBallToPiece("pink", "#e66ba2", 0, 0);
-  addBallToPiece("pink", "#e66ba2", 0, 0);
-  addBallToPiece("pink", "#e66ba2", 1, 0);
-  addBallToPiece("pink", "#e66ba2", 2, 0);
-  addBallToPiece("pink", "#e66ba2", 2, 1);
-  addBallToPiece("pink", "#e66ba2", 3, 1);
+  addPiecePart("pink", "#e66ba2", 0, 0);
+  addPiecePart("pink", "#e66ba2", 0, 0);
+  addPiecePart("pink", "#e66ba2", 1, 0);
+  addPiecePart("pink", "#e66ba2", 2, 0);
+  addPiecePart("pink", "#e66ba2", 2, 1);
+  addPiecePart("pink", "#e66ba2", 3, 1);
 
   addPiece(board, "teal", gridToWorld(0, 1));
-  addBallToPiece("teal", "#83c2b9", 0, 0);
-  addBallToPiece("teal", "#83c2b9", 0, 1);
-  addBallToPiece("teal", "#83c2b9", 1, 0);
-  addBallToPiece("teal", "#83c2b9", 1, 1);
-  addBallToPiece("teal", "#83c2b9", 1, 2);
+  addPiecePart("teal", "#83c2b9", 0, 0);
+  addPiecePart("teal", "#83c2b9", 0, 1);
+  addPiecePart("teal", "#83c2b9", 1, 0);
+  addPiecePart("teal", "#83c2b9", 1, 1);
+  addPiecePart("teal", "#83c2b9", 1, 2);
 
   addPiece(board, "lGreen", gridToWorld(0, 3));
-  addBallToPiece("lGreen", "#8eb71d", 0, 0);
-  addBallToPiece("lGreen", "#8eb71d", 0, 1);
-  addBallToPiece("lGreen", "#8eb71d", 1, 1);
-  addBallToPiece("lGreen", "#8eb71d", 2, 1);
-  addBallToPiece("lGreen", "#8eb71d", 2, 0);
+  addPiecePart("lGreen", "#8eb71d", 0, 0);
+  addPiecePart("lGreen", "#8eb71d", 0, 1);
+  addPiecePart("lGreen", "#8eb71d", 1, 1);
+  addPiecePart("lGreen", "#8eb71d", 2, 1);
+  addPiecePart("lGreen", "#8eb71d", 2, 0);
 
   addPiece(board, "maroon", gridToWorld(3, 3));
-  addBallToPiece("maroon", "#aa201e", 0, 1);
-  addBallToPiece("maroon", "#aa201e", 1, 1);
-  addBallToPiece("maroon", "#aa201e", 1, 0);
-  addBallToPiece("maroon", "#aa201e", 2, 0);
+  addPiecePart("maroon", "#aa201e", 0, 1);
+  addPiecePart("maroon", "#aa201e", 1, 1);
+  addPiecePart("maroon", "#aa201e", 1, 0);
+  addPiecePart("maroon", "#aa201e", 2, 0);
 
   addPiece(board, "orange", gridToWorld(2, 1));
-  addBallToPiece("orange", "#e78a00", 0, 1);
-  addBallToPiece("orange", "#e78a00", 1, 1);
-  addBallToPiece("orange", "#e78a00", 2, 1);
-  addBallToPiece("orange", "#e78a00", 2, 0);
-  addBallToPiece("orange", "#e78a00", 1, 2);
+  addPiecePart("orange", "#e78a00", 0, 1);
+  addPiecePart("orange", "#e78a00", 1, 1);
+  addPiecePart("orange", "#e78a00", 2, 1);
+  addPiecePart("orange", "#e78a00", 2, 0);
+  addPiecePart("orange", "#e78a00", 1, 2);
 
   addPiece(board, "dGreen", gridToWorld(5, 3));
-  addBallToPiece("dGreen", "#008455", 0, 1);
-  addBallToPiece("dGreen", "#008455", 1, 1);
-  addBallToPiece("dGreen", "#008455", 2, 1);
-  addBallToPiece("dGreen", "#008455", 1, 0);
+  addPiecePart("dGreen", "#008455", 0, 1);
+  addPiecePart("dGreen", "#008455", 1, 1);
+  addPiecePart("dGreen", "#008455", 2, 1);
+  addPiecePart("dGreen", "#008455", 1, 0);
 
   addPiece(board, "purple", gridToWorld(6, 2));
-  addBallToPiece("purple", "#7b1d7b", 0, 0);
-  addBallToPiece("purple", "#7b1d7b", 1, 0);
-  addBallToPiece("purple", "#7b1d7b", 1, 1);
-  addBallToPiece("purple", "#7b1d7b", 2, 1);
-  addBallToPiece("purple", "#7b1d7b", 2, 2);
+  addPiecePart("purple", "#7b1d7b", 0, 0);
+  addPiecePart("purple", "#7b1d7b", 1, 0);
+  addPiecePart("purple", "#7b1d7b", 1, 1);
+  addPiecePart("purple", "#7b1d7b", 2, 1);
+  addPiecePart("purple", "#7b1d7b", 2, 2);
 
   addPiece(board, "darkBlue", gridToWorld(8, 2));
-  addBallToPiece("darkBlue", "#143d8c", 0, 0);
-  addBallToPiece("darkBlue", "#143d8c", 1, 0);
-  addBallToPiece("darkBlue", "#143d8c", 1, 1);
-  addBallToPiece("darkBlue", "#143d8c", 1, 2);
+  addPiecePart("darkBlue", "#143d8c", 0, 0);
+  addPiecePart("darkBlue", "#143d8c", 1, 0);
+  addPiecePart("darkBlue", "#143d8c", 1, 1);
+  addPiecePart("darkBlue", "#143d8c", 1, 2);
 
   addPiece(board, "red", gridToWorld(9, 1));
-  addBallToPiece("red", "#d30710", 0, 0);
-  addBallToPiece("red", "#d30710", 1, 0);
-  addBallToPiece("red", "#d30710", 1, 1);
-  addBallToPiece("red", "#d30710", 1, 2);
-  addBallToPiece("red", "#d30710", 1, 3);
+  addPiecePart("red", "#d30710", 0, 0);
+  addPiecePart("red", "#d30710", 1, 0);
+  addPiecePart("red", "#d30710", 1, 1);
+  addPiecePart("red", "#d30710", 1, 2);
+  addPiecePart("red", "#d30710", 1, 3);
 
   addPiece(board, "yellow", gridToWorld(7, 0));
-  addBallToPiece("yellow", "#f5d100", 0, 0);
-  addBallToPiece("yellow", "#f5d100", 1, 0);
-  addBallToPiece("yellow", "#f5d100", 2, 0);
-  addBallToPiece("yellow", "#f5d100", 3, 0);
-  addBallToPiece("yellow", "#f5d100", 1, 1);
+  addPiecePart("yellow", "#f5d100", 0, 0);
+  addPiecePart("yellow", "#f5d100", 1, 0);
+  addPiecePart("yellow", "#f5d100", 2, 0);
+  addPiecePart("yellow", "#f5d100", 3, 0);
+  addPiecePart("yellow", "#f5d100", 1, 1);
 
   addPiece(board, "blue", gridToWorld(3, 0));
-  addBallToPiece("blue", "#0094d4", 0, 0);
-  addBallToPiece("blue", "#0094d4", 1, 0);
-  addBallToPiece("blue", "#0094d4", 2, 0);
-  addBallToPiece("blue", "#0094d4", 2, 1);
-  addBallToPiece("blue", "#0094d4", 2, 2);
+  addPiecePart("blue", "#0094d4", 0, 0);
+  addPiecePart("blue", "#0094d4", 1, 0);
+  addPiecePart("blue", "#0094d4", 2, 0);
+  addPiecePart("blue", "#0094d4", 2, 1);
+  addPiecePart("blue", "#0094d4", 2, 2);
 
   addPiece(board, "lBlue", gridToWorld(6, 0));
-  addBallToPiece("lBlue", "#98ceea", 0, 0);
-  addBallToPiece("lBlue", "#98ceea", 0, 1);
-  addBallToPiece("lBlue", "#98ceea", 1, 1);
+  addPiecePart("lBlue", "#98ceea", 0, 0);
+  addPiecePart("lBlue", "#98ceea", 0, 1);
+  addPiecePart("lBlue", "#98ceea", 1, 1);
 }
 
 function onPieceDragStart(this: string, event: PIXI.FederatedPointerEvent) {
@@ -262,7 +262,7 @@ function addPiece(
   );
 }
 
-function addBallToPiece(
+function addPiecePart(
   pieceName: string,
   color: PIXI.ColorSource,
   x: number,
