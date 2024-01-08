@@ -8,7 +8,6 @@ import { WebrtcProvider } from "y-webrtc";
 // TODO: add piece rotation
 // TODO: add piece flipping
 // TODO: do not drop piece if overlaps
-// TODO: fix zIndex bug
 // TODO?: add piece ball connectors
 // TODO?: snap inside box only
 
@@ -29,8 +28,6 @@ let dragTouchOffset: PIXI.Point;
 const pieces = {} as Record<string, PIXI.Container>;
 
 const yDoc = new Y.Doc();
-const globalState = yDoc.getMap<any>("global");
-globalState.set("maxZIndex", 100);
 const piecesState = yDoc.getMap<Y.Map<any>>("piecesState");
 
 main();
@@ -115,6 +112,7 @@ function main() {
       const piece = pieces[pieceName];
       piece.position.set(pieceState.get("x"), pieceState.get("y"));
       piece.alpha = pieceState.get("dragged") ? 0.5 : 1;
+      piece.zIndex = pieceState.get("zIndex");
     }
   });
 
@@ -212,11 +210,8 @@ function onPieceDragStart(this: string, event: PIXI.FederatedPointerEvent) {
   }
   draggedPieceName = this;
 
-  const maxZIndex = globalState.get("maxZIndex") + 1;
-  globalState.set("maxZIndex", maxZIndex);
-
   pieceState.set("dragged", true);
-  pieceState.set("zIndex", maxZIndex);
+  pieceState.set("zIndex", Date.now());
 
   const dragTarget = pieces[draggedPieceName];
   dragTouchOffset = dragTarget.position.subtract(
